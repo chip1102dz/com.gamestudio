@@ -13,7 +13,7 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('Sonar_Server') {
+                withSonarQubeEnv('Sonar_Sever') {
                     bat "gradlew sonar" // Đảm bảo rằng bạn đang sử dụng lệnh chính xác
                 }
             }
