@@ -1,22 +1,45 @@
 pipeline {
     agent any
     stages {
-        stage('SCM') {
+        stage('Checkout') {
             steps {
+                // Kiểm tra mã nguồn từ Git
                 checkout scm
             }
         }
         stage('Build') {
             steps {
-                bat "gradlew build" // Đảm bảo rằng bạn đang sử dụng lệnh chính xác
+                // Xây dựng dự án với Gradle
+                script {
+                    def result = bat(script: "gradlew build", returnStatus: true)
+                    if (result != 0) {
+                        error("Build failed. Please check the output for errors.")
+                    }
+                }
             }
         }
         stage('SonarQube Analysis') {
             steps {
+                // Phân tích mã nguồn với SonarQube
                 withSonarQubeEnv('Sonar_Sever') {
-                    bat "gradlew sonar" // Đảm bảo rằng bạn đang sử dụng lệnh chính xác
+                    script {
+                        def result = bat(script: "gradlew sonar", returnStatus: true)
+                        if (result != 0) {
+                            error("SonarQube analysis failed. Please check the output for errors.")
+                        }
+                    }
                 }
             }
+        }
+    }
+    post {
+        failure {
+            // Thông báo khi build thất bại
+            echo 'Build or analysis failed. Please check the logs for details.'
+        }
+        success {
+            // Thông báo khi build thành công
+            echo 'Build and analysis completed successfully!'
         }
     }
 }
