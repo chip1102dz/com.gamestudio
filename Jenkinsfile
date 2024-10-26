@@ -1,10 +1,22 @@
-node {
-  stage('SCM') {
-    checkout scm
-  }
-  stage('SonarQube Analysis') {
-    withSonarQubeEnv('Sonar_Sever') { // Tự động sử dụng cấu hình SonarQube đã định nghĩa
-        bat "gradlew sonar" // Chạy lệnh phân tích trên Windows
+pipeline {
+    agent any
+    stages {
+        stage('SCM') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Build') {
+            steps {
+                bat "/gradlew build" // Thay 'sh' bằng 'bat' cho Windows
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('Sonar_Sever') {
+                    bat "/gradlew sonar" // Thay 'sh' bằng 'bat' cho Windows
+                }
+            }
+        }
     }
-  }
 }
