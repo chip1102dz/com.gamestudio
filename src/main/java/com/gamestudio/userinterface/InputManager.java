@@ -31,4 +31,7 @@ public class InputManager {
         gameState.setReleasedButton(code);
     }
 
+    public void Haha(int code){
+        gameState.setReleasedButton(code);
+    }
 }
