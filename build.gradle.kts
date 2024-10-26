@@ -1,6 +1,5 @@
 plugins {
     id("java")
-    id("org.sonarqube") version "5.0.0.4638"
 }
 
 group = "com.gamestudio"
@@ -17,11 +16,5 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
-}
-sonar {
-  properties {
-    property("sonar.projectKey", "Onix-Project")
-    property("sonar.projectName", "Onix-Project")
-  }
 }
 
