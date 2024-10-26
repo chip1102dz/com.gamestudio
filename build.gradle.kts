@@ -19,9 +19,11 @@ tasks.test {
     useJUnitPlatform()
 }
 sonar {
-  properties {
-    property("sonar.projectKey", "Onix-Project")
-    property("sonar.projectName", "Onix-Project")
-  }
+    properties {
+        property("sonar.projectKey", "Onix-Project")
+        property("sonar.projectName", "Onix-Project")
+        property("sonar.sources", "src/main/java") // Thêm đường dẫn tới mã nguồn
+        property("sonar.java.binaries", "build/classes/java/main") // Đường dẫn tới các lớp đã biên dịch
+    }
 }
 
