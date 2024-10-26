@@ -31,6 +31,4 @@ public class InputManager {
         gameState.setReleasedButton(code);
     }
 
-
-    pubsf
 }
