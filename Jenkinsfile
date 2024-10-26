@@ -8,13 +8,13 @@ pipeline {
         }
         stage('Build') {
             steps {
-                bat "/gradlew build" // Thay 'sh' bằng 'bat' cho Windows
+                bat "gradlew build" // Đảm bảo rằng bạn đang sử dụng lệnh chính xác
             }
         }
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('Sonar_Sever') {
-                    bat "/gradlew sonar" // Thay 'sh' bằng 'bat' cho Windows
+                withSonarQubeEnv('Sonar_Server') {
+                    bat "gradlew sonar" // Đảm bảo rằng bạn đang sử dụng lệnh chính xác
                 }
             }
         }
