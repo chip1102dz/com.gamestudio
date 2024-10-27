@@ -3,7 +3,7 @@ node {
     checkout scm
   }
   stage('SonarQube Analysis') {
-    withSonarQubeEnv('Sonar_Sever') {  // Đảm bảo tên cấu hình SonarQube trong Jenkins là 'Sonar_Sever'
+    withSonarQubeEnv('SonarSever') {  // Đảm bảo tên cấu hình SonarQube trong Jenkins là 'Sonar_Sever'
       // Cấp quyền thực thi cho gradlew
       sh 'chmod +x ./gradlew'
       
