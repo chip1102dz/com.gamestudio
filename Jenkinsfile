@@ -1,14 +1,22 @@
-node {
-  stage('SCM') {
-    checkout scm
-  }
-  stage('SonarQube Analysis') {
-    withSonarQubeEnv('SonarSever') {  // Đảm bảo tên cấu hình SonarQube trong Jenkins là 'Sonar_Sever'
-      // Cấp quyền thực thi cho gradlew
-      sh "chmod +x ./gradlew"
-      
-      // Chạy SonarQube
-      sh "./gradlew sonar"
+pipeline {
+    agent any
+    stages {
+        stage('SCM') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Build') {
+            steps {
+                sh "./gradlew build" // Đảm bảo rằng bạn đang sử dụng lệnh chính xác
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarSever') {
+                    sh "./gradlew sonar" // Đảm bảo rằng bạn đang sử dụng lệnh chính xác
+                }
+            }
+        }
     }
-  }
 }
