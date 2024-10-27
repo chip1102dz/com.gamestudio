@@ -22,8 +22,9 @@ sonar {
     properties {
         property("sonar.projectKey", "TestSonar")
         property("sonar.projectName", "TestSonar")
-        property("sonar.sources", "src/main/java") // Thêm đường dẫn tới mã nguồn
-        property("sonar.java.binaries", "build/classes/java/main") // Đường dẫn tới các lớp đã biên dịch
+        property("sonar.sources", "src/main/java") 
+        property("sonar.java.binaries", "build/classes/java/main")
     }
 }
+
 
