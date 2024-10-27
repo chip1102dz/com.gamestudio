@@ -83,47 +83,50 @@ public class CacheDataLoader {
         
     }
 
-    public void LoadSounds() throws IOException {
-        sounds = new Hashtable<>();
+    public void LoadSounds() throws IOException{
+        sounds = new Hashtable<String, AudioClip>();
 
-        try (FileReader fr = new FileReader(soundfile);
-             BufferedReader br = new BufferedReader(fr)) {
+        FileReader fr = new FileReader(soundfile);
+        BufferedReader br = new BufferedReader(fr);
 
-            String line = br.readLine();
-            if (line == null) { // Nếu không có dữ liệu
-                System.out.println("No data");
-                throw new IOException();
-            }
+        String line = null;
 
-            // Đọc số lượng âm thanh
-            int n = Integer.parseInt(line.trim());
+        if(br.readLine()==null) { // no line = "" or something like that
+            System.out.println("No data");
+            throw new IOException();
+        }
+        else {
 
-            for (int i = 0; i < n; i++) {
+            fr = new FileReader(soundfile);
+            br = new BufferedReader(fr);
+
+            while((line = br.readLine()).equals(""));
+
+            int n = Integer.parseInt(line);
+
+            for(int i = 0;i < n; i ++){
+
                 AudioClip audioClip = null;
-                line = br.readLine();
+                while((line = br.readLine()).equals(""));
 
-                // Bỏ qua dòng trống
-                while (line != null && line.trim().isEmpty()) {
-                    line = br.readLine();
-                }
+                String[] str = line.split(" ");
+                String name = str[0];
 
-                if (line != null) {
-                    String[] str = line.split(" ");
-                    String name = str[0];
-                    String path = str[1];
+                String path = str[1];
 
-                    try {
-                        audioClip = Applet.newAudioClip(new URL("file", "", path));
-                    } catch (MalformedURLException ex) {
-                        ex.printStackTrace();
-                    }
+                try {
+                   audioClip =  Applet.newAudioClip(new URL("file","",str[1]));
 
-                    instance.sounds.put(name, audioClip);
-                }
+                } catch (MalformedURLException ex) {}
+
+                instance.sounds.put(name, audioClip);
             }
-        } // Tài nguyên được tự động đóng sau khi ra khỏi khối try
-    }
 
+        }
+
+        br.close();
+
+    }
 
     public void LoadBackgroundMap() throws IOException{
         
