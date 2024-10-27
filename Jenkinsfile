@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
+        stage('SCM') {
             steps {
                 // Kiểm tra mã nguồn từ Git
                 checkout scm
