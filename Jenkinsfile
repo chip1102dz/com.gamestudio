@@ -11,7 +11,7 @@ pipeline {
             steps {
                 // Xây dựng dự án với Gradle
                 script {
-                    def result = bat(script: "gradlew build", returnStatus: true)
+                    def result = sh(script: "./gradlew build", returnStatus: true)
                     if (result != 0) {
                         error("Build failed. Please check the output for errors.")
                     }
@@ -23,7 +23,7 @@ pipeline {
                 // Phân tích mã nguồn với SonarQube
                 withSonarQubeEnv('Sonar_Sever') {
                     script {
-                        def result = bat(script: "gradlew sonar", returnStatus: true)
+                        def result = sh(script: "./gradlew sonarqube", returnStatus: true)
                         if (result != 0) {
                             error("SonarQube analysis failed. Please check the output for errors.")
                         }
