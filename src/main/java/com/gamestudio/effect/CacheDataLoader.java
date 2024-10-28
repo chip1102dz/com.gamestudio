@@ -96,14 +96,14 @@ public class CacheDataLoader {
             }
 
 
-            while((line = br.readLine()).equals(""));
+            while ((line = br.readLine()).equals("")) ;
 
             int n = Integer.parseInt(line);
 
-            for(int i = 0;i < n; i ++){
+            for (int i = 0; i < n; i++) {
 
                 AudioClip audioClip = null;
-                while((line = br.readLine()).equals(""));
+                while ((line = br.readLine()).equals("")) ;
 
                 String[] str = line.split(" ");
                 String name = str[0];
@@ -111,14 +111,15 @@ public class CacheDataLoader {
                 String path = str[1];
 
                 try {
-                   audioClip =  Applet.newAudioClip(new URL("file","",str[1]));
+                    audioClip = Applet.newAudioClip(new URL("file", "", str[1]));
 
-                } catch (MalformedURLException ex) {}
+                } catch (MalformedURLException ex) {
+                }
 
                 instance.sounds.put(name, audioClip);
             }
 
-
+        }
     }
 
     public void LoadBackgroundMap() throws IOException{
