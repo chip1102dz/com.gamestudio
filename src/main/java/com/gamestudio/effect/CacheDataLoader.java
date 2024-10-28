@@ -84,21 +84,17 @@ public class CacheDataLoader {
     }
 
     public void LoadSounds() throws IOException{
-        sounds = new Hashtable<String, AudioClip>();
+        sounds = new Hashtable<>();
 
-        FileReader fr = new FileReader(soundfile);
-        BufferedReader br = new BufferedReader(fr);
+        try (FileReader fr = new FileReader(soundfile);
+             BufferedReader br = new BufferedReader(fr)) {
 
-        String line = null;
-
-        if(br.readLine()==null) { // no line = "" or something like that
-            System.out.println("No data");
-            throw new IOException();
-        }
-        else {
-
-            fr = new FileReader(soundfile);
-            br = new BufferedReader(fr);
+            String line = br.readLine();
+            if (line == null) { // Nếu không có dữ liệu
+                System.out.println("No data");
+                throw new IOException();
+            }
+            
 
             while((line = br.readLine()).equals(""));
 
@@ -122,9 +118,6 @@ public class CacheDataLoader {
                 instance.sounds.put(name, audioClip);
             }
 
-        }
-
-        br.close();
 
     }
 
