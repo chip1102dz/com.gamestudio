@@ -94,7 +94,7 @@ public class CacheDataLoader {
                 System.out.println("No data");
                 throw new IOException();
             }
-            
+
 
             while((line = br.readLine()).equals(""));
 
