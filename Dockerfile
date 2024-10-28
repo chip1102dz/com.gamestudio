@@ -1,5 +1,5 @@
 # Sử dụng base image phù hợp với Java (ví dụ OpenJDK)
-FROM openjdk:17-jre-slim
+FROM openjdk:17
 
 # Đặt thư mục làm việc trong container
 WORKDIR /usr/src/app
